@@ -126,7 +126,9 @@ where entidad_res in (
 					  'CHIAPAS','OAXACA',
 		              'QUINTANA ROO','TABASCO','VERACRUZ DE IGNACIO DE LA LLAVE','YUCATÁN'))
 
-/*PARA LA CONSULTA 1*/
+/*1. Listar por entidad de residencia cuantos 
+      casos confirmados / casos registrados por mes
+	  de los años 2020 y 2021.*/
 
 
 
@@ -142,11 +144,11 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_centro.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
----order by A.ENTIDAD_RES, A.mes, A.anio)
+--order by A.ENTIDAD_RES, A.mes, A.anio)
 UNION
 (select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
 from
@@ -160,7 +162,7 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_noreste.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
@@ -178,7 +180,7 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_noroeste.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
@@ -196,7 +198,7 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_occidente.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
@@ -214,12 +216,18 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_sureste.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
---order by A.ENTIDAD_RES, A.mes, A.anio
-UNION
+order by A.ENTIDAD_RES, A.mes, A.anio
+
+
+/*Creando vista de la consulta 1*/
+
+use covidHistorico
+create view consultaUno
+as 
 (select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
 from
 (select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
@@ -232,14 +240,88 @@ inner join
 (select T.entidad_res, T.mes, T.anio, count(*) total_registrados
  from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
               year(fecha_ingreso) anio, CLASIFICACION_FINAL
-       from datoscovid) as T
+       from region_centro.dbo.datoscovid) as T
 group by entidad_res, mes, anio)  as B
 on A.ENTIDAD_RES = B.ENTIDAD_RES and
    A.mes = B.mes and A.anio = B.anio)
-order by A.ENTIDAD_RES, A.mes, A.anio
+--order by A.ENTIDAD_RES, A.mes, A.anio)
+UNION
+(select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
+from
+(select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
+from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noreste.dbo.datoscovid) as T
+where CLASIFICACION_FINAL between 1 and 3
+group by entidad_res, mes, anio)  as A
+inner join
+(select T.entidad_res, T.mes, T.anio, count(*) total_registrados
+ from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noreste.dbo.datoscovid) as T
+group by entidad_res, mes, anio)  as B
+on A.ENTIDAD_RES = B.ENTIDAD_RES and
+   A.mes = B.mes and A.anio = B.anio)
+--order by A.ENTIDAD_RES, A.mes, A.anio)
+UNION
+(select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
+from
+(select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
+from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noroeste.dbo.datoscovid) as T
+where CLASIFICACION_FINAL between 1 and 3
+group by entidad_res, mes, anio)  as A
+inner join
+(select T.entidad_res, T.mes, T.anio, count(*) total_registrados
+ from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noroeste.dbo.datoscovid) as T
+group by entidad_res, mes, anio)  as B
+on A.ENTIDAD_RES = B.ENTIDAD_RES and
+   A.mes = B.mes and A.anio = B.anio)
+--order by A.ENTIDAD_RES, A.mes, A.anio
+UNION
+(select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
+from
+(select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
+from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_occidente.dbo.datoscovid) as T
+where CLASIFICACION_FINAL between 1 and 3
+group by entidad_res, mes, anio)  as A
+inner join
+(select T.entidad_res, T.mes, T.anio, count(*) total_registrados
+ from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_occidente.dbo.datoscovid) as T
+group by entidad_res, mes, anio)  as B
+on A.ENTIDAD_RES = B.ENTIDAD_RES and
+   A.mes = B.mes and A.anio = B.anio)
+--order by A.ENTIDAD_RES, A.mes, A.anio
+UNION
+(select A.ENTIDAD_RES, A.mes, A.anio, A.total_confirmados, B.total_registrados
+from
+(select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
+from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_sureste.dbo.datoscovid) as T
+where CLASIFICACION_FINAL between 1 and 3
+group by entidad_res, mes, anio)  as A
+inner join
+(select T.entidad_res, T.mes, T.anio, count(*) total_registrados
+ from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_sureste.dbo.datoscovid) as T
+group by entidad_res, mes, anio)  as B
+on A.ENTIDAD_RES = B.ENTIDAD_RES and
+   A.mes = B.mes and A.anio = B.anio)
 
+   select * from consultaUno order by ENTIDAD_RES, mes, anio
 
 /*
 2. Determinar en que entidad de residencia y en 
 	  que mes se reportaron más casos confirmados.
 */
+use region_noreste
+select ENTIDAD_RES from datoscovid
