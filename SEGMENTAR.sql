@@ -324,4 +324,11 @@ on A.ENTIDAD_RES = B.ENTIDAD_RES and
 	  que mes se reportaron más casos confirmados.
 */
 use region_noreste
-select ENTIDAD_RES from datoscovid
+select A.ENTIDAD_RES,A.mes,A.anio,MAX(A.total_confirmados) from(
+	select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
+	from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+				  year(fecha_ingreso) anio, CLASIFICACION_FINAL
+		   from datoscovid) as T
+	where CLASIFICACION_FINAL between 1 and 3
+	group by entidad_res, mes, anio) as A
+order by ENTIDAD_RES, mes, anio
