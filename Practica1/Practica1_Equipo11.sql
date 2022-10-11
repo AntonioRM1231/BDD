@@ -1,3 +1,6 @@
+--EQUIPO 11 
+--RODRIGUEZ MARQUEZ JOSE ANTONIO
+--SALTO CRUZ ANAHI
 --1 USAR LA BASE COVIDHISTORICO
 use covidHistorico
 
@@ -127,8 +130,10 @@ where entidad_res in (
 		              'QUINTANA ROO','TABASCO','VERACRUZ DE IGNACIO DE LA LLAVE','YUCATÁN'))
 
 /*1. Listar por entidad de residencia cuantos 
-      casos confirmados / casos registrados por mes
-	  de los años 2020 y 2021.*/
+     casos confirmados / casos registrados por mes
+	 de los años 2020 y 2021.
+	 by Anahi Salto Cruz
+*/
 
 
 
@@ -321,14 +326,248 @@ on A.ENTIDAD_RES = B.ENTIDAD_RES and
 
 /*
 2. Determinar en que entidad de residencia y en 
-	  que mes se reportaron más casos confirmados.
+   que mes se reportaron más casos confirmados.
+   by Anahi Salto Cruz 
 */
-use region_noreste
-select A.ENTIDAD_RES,A.mes,A.anio,MAX(A.total_confirmados) from(
-	select T.entidad_res, T.mes, T.anio, count(*) total_confirmados
-	from ( select id_registro, entidad_res, month(FECHA_INGRESO) mes,
-				  year(fecha_ingreso) anio, CLASIFICACION_FINAL
-		   from datoscovid) as T
-	where CLASIFICACION_FINAL between 1 and 3
-	group by entidad_res, mes, anio) as A
-order by ENTIDAD_RES, mes, anio
+
+select top 1 total_confirmados, mes, entidad_res
+	from covidHistorico.dbo.consultaUno
+	order by total_confirmados desc;
+
+/*
+3. Determinar cuantos casos fueron atendidos en 
+   entidades distintas a la entidad de residencia.
+   by Jose Antonio Rodriguez Marquez
+*/
+select sum(C.casos_distintos) casos_distintos_totales from
+(select count(*) as casos_distintos	
+from region_noroeste.dbo.datoscovid
+where entidad_um != entidad_res
+union
+select count(*) as casos_distintos
+from region_noreste.dbo.datoscovid
+where entidad_um != entidad_res
+union
+select count(*) as casos_distintos
+from region_centro.dbo.datoscovid
+where entidad_um != entidad_res
+union
+select count(*) as casos_distintos
+from region_occidente.dbo.datoscovid
+where entidad_um != entidad_res
+union
+select count(*) as casos_distintos
+from region_sureste.dbo.datoscovid
+where entidad_um != entidad_res) as C
+/*
+4. Determinar la evolución de la pandemia 
+   (casos registrados / casos sospechosos / 
+   casos confirmados por mes) en cada una de las entidades 
+   del país. Esta información permitirá identificar
+   los picos de casos en las diferentes olas de contagio
+   registradas.
+   by Jose Antonio Rodriguez Marquez 
+*/
+select U.entidad_res,U.mes,U.anio,U.casos_registrados,W.casos_confirmados,Y.casos_sospechosos
+from
+(select S.entidad_res,S.mes,S.anio,count(*) as casos_registrados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noroeste.dbo.datoscovid)as S
+	   group by entidad_res,mes,anio)as U
+left join
+(select V.entidad_res,V.mes,V.anio,count(*) as casos_confirmados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noroeste.dbo.datoscovid)as V
+	   where CLASIFICACION_FINAL between 1 and 3
+	   group by entidad_res,mes,anio)AS W
+on U.ENTIDAD_RES = W.ENTIDAD_RES AND
+   U.mes = W.mes AND U.anio =W.anio
+left join
+(select X.entidad_res,X.mes,X.anio,count(*) as casos_sospechosos
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noroeste.dbo.datoscovid)as X
+	   where CLASIFICACION_FINAL = 6
+	   group by entidad_res,mes,anio)AS Y
+on U.ENTIDAD_RES = Y.ENTIDAD_RES AND
+   U.mes = Y.mes AND U.anio =Y.anio
+
+UNION 
+
+select U.entidad_res,U.mes,U.anio,U.casos_registrados,W.casos_confirmados,Y.casos_sospechosos
+from
+(select S.entidad_res,S.mes,S.anio,count(*) as casos_registrados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noreste.dbo.datoscovid)as S
+	   group by entidad_res,mes,anio)as U
+left join
+(select V.entidad_res,V.mes,V.anio,count(*) as casos_confirmados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noreste.dbo.datoscovid)as V
+	   where CLASIFICACION_FINAL between 1 and 3
+	   group by entidad_res,mes,anio)AS W
+on U.ENTIDAD_RES = W.ENTIDAD_RES AND
+   U.mes = W.mes AND U.anio =W.anio
+left join
+(select X.entidad_res,X.mes,X.anio,count(*) as casos_sospechosos
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_noreste.dbo.datoscovid)as X
+	   where CLASIFICACION_FINAL = 6
+	   group by entidad_res,mes,anio)AS Y
+on U.ENTIDAD_RES = Y.ENTIDAD_RES AND
+   U.mes = Y.mes AND U.anio =Y.anio
+
+UNION
+
+select U.entidad_res,U.mes,U.anio,U.casos_registrados,W.casos_confirmados,Y.casos_sospechosos
+from
+(select S.entidad_res,S.mes,S.anio,count(*) as casos_registrados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_centro.dbo.datoscovid)as S
+	   group by entidad_res,mes,anio)as U
+left join
+(select V.entidad_res,V.mes,V.anio,count(*) as casos_confirmados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_centro.dbo.datoscovid)as V
+	   where CLASIFICACION_FINAL between 1 and 3
+	   group by entidad_res,mes,anio)AS W
+on U.ENTIDAD_RES = W.ENTIDAD_RES AND
+   U.mes = W.mes AND U.anio =W.anio
+left join
+(select X.entidad_res,X.mes,X.anio,count(*) as casos_sospechosos
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_centro.dbo.datoscovid)as X
+	   where CLASIFICACION_FINAL = 6
+	   group by entidad_res,mes,anio)AS Y
+on U.ENTIDAD_RES = Y.ENTIDAD_RES AND
+   U.mes = Y.mes AND U.anio =Y.anio
+
+ UNION
+
+ select U.entidad_res,U.mes,U.anio,U.casos_registrados,W.casos_confirmados,Y.casos_sospechosos
+from
+(select S.entidad_res,S.mes,S.anio,count(*) as casos_registrados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_occidente.dbo.datoscovid)as S
+	   group by entidad_res,mes,anio)as U
+left join
+(select V.entidad_res,V.mes,V.anio,count(*) as casos_confirmados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_occidente.dbo.datoscovid)as V
+	   where CLASIFICACION_FINAL between 1 and 3
+	   group by entidad_res,mes,anio)AS W
+on U.ENTIDAD_RES = W.ENTIDAD_RES AND
+   U.mes = W.mes AND U.anio =W.anio
+left join
+(select X.entidad_res,X.mes,X.anio,count(*) as casos_sospechosos
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_occidente.dbo.datoscovid)as X
+	   where CLASIFICACION_FINAL = 6
+	   group by entidad_res,mes,anio)AS Y
+on U.ENTIDAD_RES = Y.ENTIDAD_RES AND
+   U.mes = Y.mes AND U.anio =Y.anio
+
+UNION
+
+select U.entidad_res,U.mes,U.anio,U.casos_registrados,W.casos_confirmados,Y.casos_sospechosos
+from
+(select S.entidad_res,S.mes,S.anio,count(*) as casos_registrados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_sureste.dbo.datoscovid)as S
+	   group by entidad_res,mes,anio)as U
+left join
+(select V.entidad_res,V.mes,V.anio,count(*) as casos_confirmados
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_sureste.dbo.datoscovid)as V
+	   where CLASIFICACION_FINAL between 1 and 3
+	   group by entidad_res,mes,anio)AS W
+on U.ENTIDAD_RES = W.ENTIDAD_RES AND
+   U.mes = W.mes AND U.anio =W.anio
+left join
+(select X.entidad_res,X.mes,X.anio,count(*) as casos_sospechosos
+from
+(select id_registro, entidad_res, month(FECHA_INGRESO) mes,
+              year(fecha_ingreso) anio, CLASIFICACION_FINAL
+       from region_sureste.dbo.datoscovid)as X
+	   where CLASIFICACION_FINAL = 6
+	   group by entidad_res,mes,anio)AS Y
+on U.ENTIDAD_RES = Y.ENTIDAD_RES AND
+   U.mes = Y.mes AND U.anio =Y.anio
+
+/*5. Determinar cuantos registros se repiten en la 
+      base de datos, considerando las siguientes columnas: 
+	  [ENTIDAD_UM],[SEXO],[ENTIDAD_NAC],[ENTIDAD_RES]
+      ,[MUNICIPIO_RES],[EDAD],[NACIONALIDAD]      
+      ,[HABLA_LENGUA_INDIG],[INDIGENA],[DIABETES]
+      ,[EPOC],[ASMA],[INMUSUPR],[HIPERTENSION],[OTRA_COM]
+      ,[CARDIOVASCULAR],[OBESIDAD],[RENAL_CRONICA]
+      ,[TABAQUISMO],[OTRO_CASO],[MIGRANTE]
+      ,[PAIS_NACIONALIDAD],[PAIS_ORIGEN]     
+
+	  Ordenar los datos por entidad de residencia
+	  by Anahi Salto Cruz
+	  */
+
+	select sum(Z.carry) registros_repetidos_totales
+	FROM (
+		 SELECT count(*) as carry
+		 FROM covidHistorico.dbo.datoscovid
+		 GROUP BY ENTIDAD_UM,SEXO,ENTIDAD_NAC,ENTIDAD_RES,MUNICIPIO_RES,EDAD,NACIONALIDAD,HABLA_LENGUA_INDIG, INDIGENA,DIABETES,EPOC,ASMA,
+		 INMUSUPR,HIPERTENSION,OTRA_COM,CARDIOVASCULAR,OBESIDAD,RENAL_CRONICA,TABAQUISMO,OTRO_CASO,MIGRANTE,PAIS_NACIONALIDAD,PAIS_ORIGEN
+		 HAVING COUNT(*)>1
+		 ) as Z
+
+/*------- CONCLUSIONES -------
+Anahi Salto Cruz
+Al realizar esta práctica, he notado de una manera más profunda la importancia de las Bases de Datos. Antes de esto, 
+sabía de su importancia, pero no al grado de saber todo lo que se puede llegar a hacer. En el caso especial, de la 
+base de datos del COVID-19, se tiene una BD muy grande, ya que como sabemos, fue y sigue siendo un suceso muy desafortunado 
+para todo el mundo, sin embargo, el poder tener todos los datos concentrados, y mejor aún, conocer estadísticas reales, hace 
+que tomemos más conciencia sobre este suceso. 
+Hay que recordar que para poder manipular todos estos datos, se debe tener un gran conocimiento sobre las Bases de Datos, 
+desde que se comienza a trabajar con ellas, para poder organizar de una manera eficiente la información, hasta el final que 
+es hacer diversas consultas; cabe recalcar que esto último es de suma importancia, ya que de no ser por las consultas, no 
+tendría mucho sentido hacer la BD, ya que lo importante es conocer la información, y sobre todo, que al hacer cualquier tipo 
+de consulta sea correcta. 
+Nosotros como telemáticos no podemos dar una respuesta falsa (por ejemplo, el resultado equivocado de una consulta solicitada). 
+Por último, las consultas solicitadas en la práctica las sentí con un grado de dificultad un poco alta, sin embargo, son 
+enriquecedoras y las veo cercanas a la realidad.
+
+Jose Antonio Rodriguez Marquez 
+Al trabajar con una base de datos muy grande, como lo es esta de "covidHistorico", las consultas suelen ocupar muchos recursos
+de nuestros equipos, es por esta razon que se deben de realizar de manera eficiente y tomando en cuento esta desverntas, sin embargo
+en lo que llevamos del curso se han aprendido algunas herramientas que se pueden implementar y solucionar estos problemas. 
+Un ejemplo de esto es el algebra relacional que le permite al usuario ver a lastablas que componen a las bases de datos como conjuntos
+con lo que se pueden operaciones como uniones, intersecciones, producto cartesiano, restas, divisiones, etc. Sin embargo hay que tomar 
+en cuenta que muchas de las sentencias SQL que se ocupan para realizar estas pueden interferir con otras un ejemplo es al usar UNION,
+que no permite integrar order by dentro de las consultas con las que trabajara. Ese fue el ejemplo mas claro que se pudo observar 
+en la practica aunque la sentencia order by suele causar mas problemas, por ejemplo en la creacion y manejo de vistas, esto en
+practica ya que, cuando se creo la vista de la consulta 1, se tuvo que ocupar el order by en el select de la vista y no como parte de ella.
+*/
