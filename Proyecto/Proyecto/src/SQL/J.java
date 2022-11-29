@@ -68,9 +68,14 @@ public class J extends javax.swing.JFrame {
             }
         });
 
-        txtMesFinalJ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", " " }));
+        txtMesFinalJ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", " " }));
 
-        txtMesInicioJ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", " " }));
+        txtMesInicioJ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        txtMesInicioJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMesInicioJActionPerformed(evt);
+            }
+        });
 
         tblJ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +125,7 @@ public class J extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMesInicioJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtAnioInicioJ, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
+                        .addComponent(txtAnioInicioJ, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
                 .addGap(10, 10, 10)
                 .addComponent(btnHomeJ)
                 .addGap(22, 22, 22))
@@ -173,13 +178,21 @@ public class J extends javax.swing.JFrame {
         try{
             DefaultTableModel modelo;
             ConsultaJ cj= new ConsultaJ();
-            modelo=cj.Consultar("", "");
+            String mes = (String)txtMesInicioJ.getSelectedItem();
+            String mesF = (String)txtMesFinalJ.getSelectedItem();
+            String fechaInicio = txtAnioInicioJ.getText()+mes+txtDiaInicioJ.getText();
+            String fechaFinal = txtAnioFinalJ.getText()+mesF+txtDiaFinalJ.getText();
+            modelo=cj.Consultar(fechaInicio, fechaFinal);
             tblJ.setModel(modelo);
             
         }catch(Exception e){
             
         }
     }//GEN-LAST:event_btnConsultarJActionPerformed
+
+    private void txtMesInicioJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMesInicioJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMesInicioJActionPerformed
 
     /**
      * @param args the command line arguments
