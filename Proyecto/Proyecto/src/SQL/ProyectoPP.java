@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SQL;
+package SQL; 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,8 +39,21 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuB = new javax.swing.JMenu();
         irB = new javax.swing.JMenuItem();
         menuC = new javax.swing.JMenu();
+        irC = new javax.swing.JMenuItem();
         menuD = new javax.swing.JMenu();
+        irD = new javax.swing.JMenuItem();
         menuE = new javax.swing.JMenu();
+        irE = new javax.swing.JMenuItem();
+        menuF = new javax.swing.JMenu();
+        irF = new javax.swing.JMenuItem();
+        menuG = new javax.swing.JMenu();
+        irG = new javax.swing.JMenuItem();
+        menuH = new javax.swing.JMenu();
+        irH = new javax.swing.JMenuItem();
+        menuI = new javax.swing.JMenu();
+        irI = new javax.swing.JMenuItem();
+        menuJ = new javax.swing.JMenu();
+        irJ = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,13 +94,60 @@ public class ProyectoPP extends javax.swing.JFrame {
         jMenuBar1.add(menuB);
 
         menuC.setText("C");
+
+        irC.setText("ir C");
+        menuC.add(irC);
+
         jMenuBar1.add(menuC);
 
         menuD.setText("D");
+
+        irD.setText("ir D");
+        menuD.add(irD);
+
         jMenuBar1.add(menuD);
 
         menuE.setText("E");
+
+        irE.setText("ir E");
+        menuE.add(irE);
+
         jMenuBar1.add(menuE);
+
+        menuF.setText("F");
+
+        irF.setText("ir F");
+        menuF.add(irF);
+
+        jMenuBar1.add(menuF);
+
+        menuG.setText("G");
+
+        irG.setText("ir G");
+        menuG.add(irG);
+
+        jMenuBar1.add(menuG);
+
+        menuH.setText("H");
+
+        irH.setText("ir H");
+        menuH.add(irH);
+
+        jMenuBar1.add(menuH);
+
+        menuI.setText("I");
+
+        irI.setText("ir I");
+        menuI.add(irI);
+
+        jMenuBar1.add(menuI);
+
+        menuJ.setText("J");
+
+        irJ.setText("ir J");
+        menuJ.add(irJ);
+
+        jMenuBar1.add(menuJ);
 
         setJMenuBar(jMenuBar1);
 
@@ -188,11 +248,24 @@ public class ProyectoPP extends javax.swing.JFrame {
     private javax.swing.JButton btnConectar;
     private javax.swing.JMenuItem irA;
     private javax.swing.JMenuItem irB;
+    private javax.swing.JMenuItem irC;
+    private javax.swing.JMenuItem irD;
+    private javax.swing.JMenuItem irE;
+    private javax.swing.JMenuItem irF;
+    private javax.swing.JMenuItem irG;
+    private javax.swing.JMenuItem irH;
+    private javax.swing.JMenuItem irI;
+    private javax.swing.JMenuItem irJ;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuA;
     private javax.swing.JMenu menuB;
     private javax.swing.JMenu menuC;
     private javax.swing.JMenu menuD;
     private javax.swing.JMenu menuE;
+    private javax.swing.JMenu menuF;
+    private javax.swing.JMenu menuG;
+    private javax.swing.JMenu menuH;
+    private javax.swing.JMenu menuI;
+    private javax.swing.JMenu menuJ;
     // End of variables declaration//GEN-END:variables
 }
