@@ -137,6 +137,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuF.setText("F");
 
         irF.setText("ir F");
+        irF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irFActionPerformed(evt);
+            }
+        });
         menuF.add(irF);
 
         jMenuBar1.add(menuF);
@@ -144,6 +149,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuG.setText("G");
 
         irG.setText("ir G");
+        irG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irGActionPerformed(evt);
+            }
+        });
         menuG.add(irG);
 
         jMenuBar1.add(menuG);
@@ -151,6 +161,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuH.setText("H");
 
         irH.setText("ir H");
+        irH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irHActionPerformed(evt);
+            }
+        });
         menuH.add(irH);
 
         jMenuBar1.add(menuH);
@@ -158,6 +173,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuI.setText("I");
 
         irI.setText("ir I");
+        irI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irIActionPerformed(evt);
+            }
+        });
         menuI.add(irI);
 
         jMenuBar1.add(menuI);
@@ -165,6 +185,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuJ.setText("J");
 
         irJ.setText("ir J");
+        irJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irJActionPerformed(evt);
+            }
+        });
         menuJ.add(irJ);
 
         jMenuBar1.add(menuJ);
@@ -253,6 +278,41 @@ public class ProyectoPP extends javax.swing.JFrame {
         c.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_irCActionPerformed
+
+    private void irFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irFActionPerformed
+        // TODO add your handling code here:
+        F f = new F();
+        f.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irFActionPerformed
+
+    private void irGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irGActionPerformed
+        // TODO add your handling code here:
+        G g = new G();
+        g.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irGActionPerformed
+
+    private void irHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irHActionPerformed
+        // TODO add your handling code here:
+        H h = new H();
+        h.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irHActionPerformed
+
+    private void irIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irIActionPerformed
+        // TODO add your handling code here:
+        I i = new I();
+        i.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irIActionPerformed
+
+    private void irJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irJActionPerformed
+        // TODO add your handling code here:
+        J j = new J();
+        j.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irJActionPerformed
 
 
     /**
