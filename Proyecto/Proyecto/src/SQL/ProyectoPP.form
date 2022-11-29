@@ -41,11 +41,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="C"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCActionPerformed"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="irC">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ir C"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irCActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

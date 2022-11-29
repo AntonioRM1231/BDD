@@ -94,8 +94,18 @@ public class ProyectoPP extends javax.swing.JFrame {
         jMenuBar1.add(menuB);
 
         menuC.setText("C");
+        menuC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCActionPerformed(evt);
+            }
+        });
 
         irC.setText("ir C");
+        irC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irCActionPerformed(evt);
+            }
+        });
         menuC.add(irC);
 
         jMenuBar1.add(menuC);
@@ -219,6 +229,7 @@ public class ProyectoPP extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_irBActionPerformed
 
+<<<<<<< HEAD
     private void irDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irDActionPerformed
         // TODO add your handling code here:
         D d = new D();
@@ -232,6 +243,18 @@ public class ProyectoPP extends javax.swing.JFrame {
         e.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_irEActionPerformed
+=======
+    private void menuCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCActionPerformed
+
+    private void irCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irCActionPerformed
+        // TODO add your handling code here:
+        C c = new C();
+        c.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irCActionPerformed
+>>>>>>> 66348921f74eff76fbd08ef1f5e84f151819dfa6
 
     /**
      * @param args the command line arguments
