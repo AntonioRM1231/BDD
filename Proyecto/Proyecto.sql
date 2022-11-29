@@ -1,7 +1,5 @@
 
-
-
---servidores 
+--servidores
 
 -- variable @cat es el argumento de entrada que
 -- corresponde a la categoría del producto
@@ -54,7 +52,7 @@ select	* from Production.ProductCategory
 go 
 create procedure sp_p1_1 @cat int as 
 begin
-select soh.TerritoryID, sum(sod.linetotal)
+select soh.TerritoryID, sum(sod.linetotal) ventas
 from AdventureWorks2019_1.sales.SalesOrderDetail sod
 inner join AdventureWorks2019_1.sales.SalesOrderHeader soh
 on sod.SalesOrderID = soh.SalesOrderID
@@ -97,7 +95,7 @@ on sod.SalesOrderID=soh.SalesOrderID
 group by sod.ProductID, soh.TerritoryID
 order by ventas desc
 end
-execute sp_p1_2 @reg='Pacific'
+execute sp_p1_2 @reg='North America'
 --Consulta c
 --Consulta d 
 
@@ -105,8 +103,8 @@ execute sp_p1_2 @reg='Pacific'
 select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
 from Sales.Customer c 
 inner join Sales.SalesOrderHeader soh
-on c.CustomerID =soh.CustomerID and c.TerritoryID=soh.TerritoryID
-where  c.TerritoryID= 8
+on c.CustomerID =soh.CustomerID and c.TerritoryID<>soh.TerritoryID
+where  c.TerritoryID= 4
 
 select sohh.CustomerID, sc.TerritorioCustomer, sc.TerritorioHeader
 from Sales.SalesOrderHeader sohh
@@ -128,7 +126,7 @@ select * from Sales.SalesOrderDetail
 where SalesOrderID=43659
 select * from Sales.SalesOrderHeader
 where CustomerID=2
-select * from Sales.Customer
+select * from Sales.SalesTerritory
 where CustomerID=29825
 select BusinessEntityID,SalesPersonID from Sales.Store
 
