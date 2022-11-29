@@ -73,8 +73,49 @@ create procedure consulta_d @territorio int as
  end
 execute consulta_d @territorio = 8
 --e
-/*para actualizar, se reciben 3 numero de orden, numero de producto, y la cantidad a actualizar*/
+go
+create procedure consulta_e
+(@OrdenId int, 
+ @ProductId int,
+ @Cantidad smallint
+ ) as
+ begin
+ if exists(select productid
+            from AdventureWorks2019_1.sales.SalesOrderDetail
+            WHERE productid = @ProductId and 
+                  SalesOrderID = @OrdenId
+ )
+ update AdventureWorks2019_1.sales.SalesOrderDetail
+ set OrderQty = @Cantidad
+ WHERE ProductID=@ProductId and SalesOrderID = @OrdenId
+ ELSE 
+ PRINT 'Orden o Producto no encontrado'
+ end
+ -- EJECUTAR EL PROCEDIMIENTO 
+ EXECUTE consulta_e @productId = 776, @OrdenId = 43659, @Cantidad = 4--1
+
 --f
+go
+create procedure consulta_f
+(@shipMethodID int, 
+ @salesorderID int
+ ) as
+ begin
+ if exists(select soh.SalesOrderID
+            from AdventureWorks2019_1.sales.SalesOrderheader soh
+            WHERE SalesOrderID= @salesorderID 
+		 )
+ update AdventureWorks2019_1.sales.SalesOrderHeader
+ set ShipMethodID = @shipMethodID
+ WHERE SalesOrderID=@salesorderID 
+ ELSE 
+ PRINT 'SalesOrderID no encontrado'
+ end
+ -- EJECUTAR EL PROCEDIMIENTO 
+ EXECUTE consulta_f @shipMethodID = 4, @SalesOrderID = 43659--1
+
+select * 
+from AdventureWorks2019.sales.SalesOrderHeader
 --g
 --h
 go
@@ -97,7 +138,7 @@ begin
 	inner join AdventureWorks2019_1.sales.SalesTerritory sst
 	on soh.TerritoryID = sst.TerritoryID
 		where OrderDate between @fecha_1 AND @fecha_2
-	group by sst."Group"
+	groupÂ byÂ sst."Group"
 end
 execute consulta_i @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
 --j
