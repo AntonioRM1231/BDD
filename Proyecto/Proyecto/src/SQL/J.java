@@ -172,8 +172,8 @@ public class J extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
             DefaultTableModel modelo;
-            ConsultaJ ca= new ConsultaJ();
-            modelo=ca.Consultar();
+            ConsultaJ cj= new ConsultaJ();
+            modelo=cj.Consultar("", "");
             tblJ.setModel(modelo);
             
         }catch(Exception e){
