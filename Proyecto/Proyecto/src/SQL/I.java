@@ -44,6 +44,7 @@ public class I extends javax.swing.JFrame {
         txtNorthAmerica = new javax.swing.JTextField();
         txtPacific = new javax.swing.JTextField();
         txtEurope = new javax.swing.JTextField();
+        btnHomeI = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +120,13 @@ public class I extends javax.swing.JFrame {
             }
         });
 
+        btnHomeI.setText("Home1");
+        btnHomeI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeIActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,9 +153,12 @@ public class I extends javax.swing.JFrame {
                                         .addComponent(mesFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(anioFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtNorthAmerica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPacific, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEurope, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtEurope, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNorthAmerica, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addComponent(btnHomeI))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8)
@@ -159,7 +170,7 @@ public class I extends javax.swing.JFrame {
                                         .addComponent(mesInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(anioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnMostrarVentas)
@@ -186,10 +197,11 @@ public class I extends javax.swing.JFrame {
                 .addComponent(btnMostrarVentas)
                 .addGap(2, 2, 2)
                 .addComponent(jLabel7)
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNorthAmerica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNorthAmerica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHomeI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -198,7 +210,7 @@ public class I extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtPacific, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,6 +247,13 @@ public class I extends javax.swing.JFrame {
     private void txtEuropeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEuropeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEuropeActionPerformed
+
+    private void btnHomeIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeIActionPerformed
+        // TODO add your handling code here:
+        ProyectoPP p = new ProyectoPP();
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHomeIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,6 +293,7 @@ public class I extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anioFinal;
     private javax.swing.JTextField anioInicio;
+    private javax.swing.JButton btnHomeI;
     private javax.swing.JButton btnMostrarVentas;
     private javax.swing.JTextField diaFinal;
     private javax.swing.JTextField diaInicio;

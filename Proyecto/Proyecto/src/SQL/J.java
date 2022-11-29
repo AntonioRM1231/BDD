@@ -27,21 +27,43 @@ public class J extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnHomeJ = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnHomeJ.setText("Home");
+        btnHomeJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeJActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(296, Short.MAX_VALUE)
+                .addComponent(btnHomeJ)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(btnHomeJ)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHomeJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeJActionPerformed
+        // TODO add your handling code here:
+        ProyectoPP p = new ProyectoPP();
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnHomeJActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +101,6 @@ public class J extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHomeJ;
     // End of variables declaration//GEN-END:variables
 }
