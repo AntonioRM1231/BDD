@@ -180,8 +180,8 @@ public class J extends javax.swing.JFrame {
             ConsultaJ cj= new ConsultaJ();
             String mes = (String)txtMesInicioJ.getSelectedItem();
             String mesF = (String)txtMesFinalJ.getSelectedItem();
-            String fechaInicio = txtAnioInicioJ.getText()+mes+txtDiaInicioJ.getText();
-            String fechaFinal = txtAnioFinalJ.getText()+mesF+txtDiaFinalJ.getText();
+            String fechaInicio = txtAnioInicioJ.getText()+"-"+mes+"-"+txtDiaInicioJ.getText();
+            String fechaFinal = txtAnioFinalJ.getText()+"-"+mesF+"-"+txtDiaFinalJ.getText();
             modelo=cj.Consultar(fechaInicio, fechaFinal);
             tblJ.setModel(modelo);
             

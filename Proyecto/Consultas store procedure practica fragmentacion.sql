@@ -72,6 +72,27 @@ create procedure consulta_d @territorio int as
 	PRINT ' no hay clientes'
  end
 execute consulta_d @territorio = 8
+
+go
+create procedure sp_p1_4 @territorio int as
+ begin
+	if exists(
+	select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
+	from AdventureWorks2019_1.Sales.Customer c 
+	inner join AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	on c.CustomerID =soh.CustomerID and c.TerritoryID<>soh.TerritoryID
+	where  c.TerritoryID= @territorio
+
+	)
+		select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
+		from AdventureWorks2019_1.Sales.Customer c 
+		inner join AdventureWorks2019_1.Sales.SalesOrderHeader soh
+		on c.CustomerID =soh.CustomerID and c.TerritoryID<>soh.TerritoryID
+		where  c.TerritoryID= @territorio
+	ELSE 
+	PRINT ' no hay clientes'
+ end
+ execute sp_p1_4 @territorio = 8
 --e
 go
 create procedure consulta_e

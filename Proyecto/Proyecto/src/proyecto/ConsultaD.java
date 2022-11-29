@@ -29,23 +29,14 @@ public class ConsultaD {
         
         try{
             
-            CallableStatement csta = cn.prepareCall("{call consulta_d(?)}");
+            CallableStatement csta = cn.prepareCall("{call sp_p1_4(?)}");
             csta.setInt(1, terr);
-            //rs=csta.executeQuery();
-            System.out.println(csta.executeQuery());
-            /*
-            while(rs.next()){
-                Registro[0]=rs.getString("ProductID");
-                Registro[1]=rs.getString("TerritoryID");
-                Registro[2]=rs.getString("ventas");
-                
-                modelo.addRow(Registro);
-            }*/
-            System.out.println("prueba");
-            return csta.executeQuery().toString();
+            rs=csta.executeQuery();
+            return "Si hay clientes";
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-            return null;
+            //JOptionPane.showMessageDialog(null, e);
+            //return null;
+            return "No hay clientes";
         }
     }
 }
