@@ -21,20 +21,20 @@ public class ConsultaI {
     private Conexion con = new Conexion();
     private Connection cn = con.getConexion();
     
-    public DefaultTableModel Consultar(String reg){
-        DefaultTableModel modelo;
-        String [] titulos = {"Producto ID","Territorio","Ventas"};
-        String [] Registro = new String[3];
+    public DefaultTableModel Consultar(String fechaInicio, String fechaFinal){
+       DefaultTableModel modelo;
+        String [] titulos = {"Group","Ventas Totales"};
+        String [] Registro = new String[2];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_2(?)}");
-            csta.setString(1, reg);
+            CallableStatement csta = cn.prepareCall("{call consulta_i(?,?)}");
+            csta.setString(1, fechaInicio);
+            csta.setString(2, fechaFinal);
             rs=csta.executeQuery();
             while(rs.next()){
-                Registro[0]=rs.getString("ProductID");
-                Registro[1]=rs.getString("TerritoryID");
-                Registro[2]=rs.getString("ventas");
+                Registro[0]=rs.getString("Group");
+                Registro[1]=rs.getString("ventas");
                 
                 modelo.addRow(Registro);
             }
@@ -43,5 +43,5 @@ public class ConsultaI {
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
-    }
+    } 
 }
