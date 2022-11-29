@@ -58,6 +58,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="ir D"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irDActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -70,6 +73,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="ir E"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="irEActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

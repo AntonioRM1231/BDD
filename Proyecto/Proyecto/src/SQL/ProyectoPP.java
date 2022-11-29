@@ -103,6 +103,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuD.setText("D");
 
         irD.setText("ir D");
+        irD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irDActionPerformed(evt);
+            }
+        });
         menuD.add(irD);
 
         jMenuBar1.add(menuD);
@@ -110,6 +115,11 @@ public class ProyectoPP extends javax.swing.JFrame {
         menuE.setText("E");
 
         irE.setText("ir E");
+        irE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                irEActionPerformed(evt);
+            }
+        });
         menuE.add(irE);
 
         jMenuBar1.add(menuE);
@@ -208,6 +218,20 @@ public class ProyectoPP extends javax.swing.JFrame {
         b.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_irBActionPerformed
+
+    private void irDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irDActionPerformed
+        // TODO add your handling code here:
+        D d = new D();
+        d.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irDActionPerformed
+
+    private void irEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irEActionPerformed
+        // TODO add your handling code here:
+        E e = new E();
+        e.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_irEActionPerformed
 
     /**
      * @param args the command line arguments
