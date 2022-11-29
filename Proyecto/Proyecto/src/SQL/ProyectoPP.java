@@ -229,7 +229,6 @@ public class ProyectoPP extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_irBActionPerformed
 
-<<<<<<< HEAD
     private void irDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_irDActionPerformed
         // TODO add your handling code here:
         D d = new D();
@@ -243,7 +242,7 @@ public class ProyectoPP extends javax.swing.JFrame {
         e.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_irEActionPerformed
-=======
+
     private void menuCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuCActionPerformed
@@ -254,7 +253,7 @@ public class ProyectoPP extends javax.swing.JFrame {
         c.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_irCActionPerformed
->>>>>>> 66348921f74eff76fbd08ef1f5e84f151819dfa6
+
 
     /**
      * @param args the command line arguments
