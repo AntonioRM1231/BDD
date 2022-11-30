@@ -39,6 +39,7 @@ end
 execute consulta_b @region='Europe'
 
 --c
+select * from  AdventureWorks2019_2.Production.ProductCategory
 go 
 CREATE PROCEDURE consulta_c (@categoria int, @localidad int) as
 begin
