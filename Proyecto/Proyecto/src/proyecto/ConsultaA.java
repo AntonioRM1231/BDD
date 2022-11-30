@@ -28,12 +28,12 @@ public class ConsultaA {
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_1(?)}");
+            CallableStatement csta = cn.prepareCall("{call consulta_a(?)}");
             csta.setInt(1, cat);
             rs=csta.executeQuery();
             while(rs.next()){
                 Registro[0]=rs.getString("TerritoryID");
-                Registro[1]=rs.getString("ventas");
+                Registro[1]=rs.getString("VentasTotales");
                 
                 modelo.addRow(Registro);
             }
