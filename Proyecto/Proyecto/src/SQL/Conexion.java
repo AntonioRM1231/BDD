@@ -15,11 +15,12 @@ import java.sql.SQLException;
  */
 public class Conexion {
     public static Connection getConexion(){
-        String conexionURL = "jdbc:sqlserver://LAPTOP-3A3Q5S9M:1433;"
-                + "database=AdventureWorks2019_2;"
-                + "user=sa;"
-                + "password=123;"
-                + "loginTimeout=30;";
+        String conexionURL = "jdbc:sqlserver://192.168.229.6:1433;"
+                + "database=AdventureWorks2019_3;"
+                + "user=alumno;"
+                + "password=Estudiante;"
+                + "loginTimeout=30;"
+                + "trustservercertificate=true";
     
         try{
             Connection con = DriverManager.getConnection(conexionURL);

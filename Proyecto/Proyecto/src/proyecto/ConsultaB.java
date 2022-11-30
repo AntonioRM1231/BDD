@@ -28,7 +28,7 @@ public class ConsultaB {
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_2(?)}");
+            CallableStatement csta = cn.prepareCall("{call consulta_b(?)}");
             csta.setString(1, reg);
             rs=csta.executeQuery();
             while(rs.next()){

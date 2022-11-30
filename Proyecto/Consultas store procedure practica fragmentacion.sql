@@ -26,11 +26,11 @@ go
 create procedure consulta_b @region nvarchar(50) as 
 begin
 	select top 1 sod.ProductID, soh.TerritoryID,sum(sod.LineTotal)as ventas 
-	from AdventureWorks2019_1.sales.SalesOrderDetail sod
-	inner join AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	from PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on sod.SalesOrderID=soh.SalesOrderID
 		where soh.TerritoryID in(
-			select TerritoryID from AdventureWorks2019_1.sales.SalesTerritory
+			select TerritoryID from PC7.AdventureWorks2019_1.sales.SalesTerritory
 			where "Group"=@region
 		)
 	group by sod.ProductID, soh.TerritoryID
