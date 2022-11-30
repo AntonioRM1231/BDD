@@ -21,20 +21,20 @@ public class ConsultaH {
     private Conexion con = new Conexion();
     private Connection cn = con.getConexion();
     
-    public DefaultTableModel Consultar(String reg){
+    public DefaultTableModel Consultar(int terr){
         DefaultTableModel modelo;
-        String [] titulos = {"Producto ID","Territorio","Ventas"};
+        String [] titulos = {"Sales Person ID","Ordenes","Territory ID"};
         String [] Registro = new String[3];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_2(?)}");
-            csta.setString(1, reg);
+            CallableStatement csta = cn.prepareCall("{call consulta_h(?)}");
+            csta.setInt(1, terr);
             rs=csta.executeQuery();
             while(rs.next()){
-                Registro[0]=rs.getString("ProductID");
-                Registro[1]=rs.getString("TerritoryID");
-                Registro[2]=rs.getString("ventas");
+                Registro[0]=rs.getString("SalesPersonID");
+                Registro[1]=rs.getString("Ordenes");
+                Registro[2]=rs.getString("TerritoryID");
                 
                 modelo.addRow(Registro);
             }
