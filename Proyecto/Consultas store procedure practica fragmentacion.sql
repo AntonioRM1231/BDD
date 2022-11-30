@@ -116,6 +116,21 @@ create procedure consulta_e
  -- EJECUTAR EL PROCEDIMIENTO 
  EXECUTE consulta_e @productId = 776, @OrdenId = 43659, @Cantidad = 4--1
 
+ --e2
+ go
+create procedure consulta_e2
+(@OrdenId int, 
+ @ProductId int
+ ) as
+ begin
+select SalesOrderID,ProductId,OrderQty
+from AdventureWorks2019_1.sales.SalesOrderDetail
+WHERE productid = @ProductId and 
+SalesOrderID =@OrdenId
+end
+ 
+ -- EJECUTAR EL PROCEDIMIENTO 
+ EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
 --f
 go
 create procedure consulta_f
