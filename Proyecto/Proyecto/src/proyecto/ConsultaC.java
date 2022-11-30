@@ -29,9 +29,9 @@ public class ConsultaC {
         String [] Registro = new String[7];
         modelo= new DefaultTableModel(null,titulos);
         try{
-            Statement sql = Conexion.getConexion().createStatement();
-            String consulta = "select * from  AdventureWorks2019_2.Production.ProductInventory";
-            rs = sql.executeQuery(consulta);
+            
+            CallableStatement csta = cn.prepareCall("{call consulta_c2()}");
+            rs = csta.executeQuery();
             while(rs.next()){
                 Registro[0]=rs.getString("ProductID");
                 Registro[1]=rs.getString("LocationID");
