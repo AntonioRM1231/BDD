@@ -116,6 +116,21 @@ create procedure consulta_e
  -- EJECUTAR EL PROCEDIMIENTO 
  EXECUTE consulta_e @productId = 776, @OrdenId = 43659, @Cantidad = 4--1
 
+ --e2
+ go
+create procedure consulta_e2
+(@OrdenId int, 
+ @ProductId int
+ ) as
+ begin
+select SalesOrderID,ProductId,OrderQty
+from AdventureWorks2019_1.sales.SalesOrderDetail
+WHERE productid = @ProductId and 
+SalesOrderID =@OrdenId
+end
+ 
+ -- EJECUTAR EL PROCEDIMIENTO 
+ EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
 --f
 go
 create procedure consulta_f
@@ -177,3 +192,34 @@ order by ventas asc
 end
 
 execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+
+--g
+ go
+create procedure consulta_g
+(@customerID int, 
+ @correo nvarchar(50)
+ ) as
+ begin
+ if exists(
+ select * 
+ from AdventureWorks2019_3.Person.EmailAddress ea
+ where( ea.BusinessEntityID =(
+		 SELECT BusinessEntityID 
+		 FROM AdventureWorks2019_3.person.Person
+		 where ( BusinessEntityID = (
+				 SELECT  PersonID
+				 FROM AdventureWorks2019_1.Sales.Customer
+				 where CustomerID=@customerID))))--30117
+		 
+		 )
+update AdventureWorks2019_3.Person.EmailAddress
+ set EmailAddress = @correo
+  WHERE  AdventureWorks2019_3.Person.EmailAddress.BusinessEntityID= (SELECT BusinessEntityID 
+		 FROM AdventureWorks2019_3.person.Person
+		 where ( BusinessEntityID = (
+				 SELECT  PersonID
+				 FROM AdventureWorks2019_1.Sales.Customer
+				 where CustomerID=@customerID)))
+ end
+
+ execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
