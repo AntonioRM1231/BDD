@@ -20,6 +20,7 @@ public class A extends javax.swing.JFrame {
      */
     public A() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

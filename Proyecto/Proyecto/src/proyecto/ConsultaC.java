@@ -28,11 +28,11 @@ public class ConsultaC {
         String [] titulos = {"ProductoID","LocationID","Shelf","Bin","Quantity","rowguid","ModifiedDate"};
         String [] Registro = new String[7];
         modelo= new DefaultTableModel(null,titulos);
+        
         try{
             
             CallableStatement csta = cn.prepareCall("{call consulta_c2()}");
             rs = csta.executeQuery();
-            cn.close();
             while(rs.next()){
                 Registro[0]=rs.getString("ProductID");
                 Registro[1]=rs.getString("LocationID");
@@ -47,6 +47,7 @@ public class ConsultaC {
             return modelo;
             
         }catch(SQLException ex){
+            
             JOptionPane.showMessageDialog(null, ex.toString());
         }
         return null;

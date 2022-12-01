@@ -19,6 +19,7 @@ public class I extends javax.swing.JFrame {
      */
     public I() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -88,7 +89,7 @@ public class I extends javax.swing.JFrame {
             }
         });
 
-        btnHomeI.setText("Home1");
+        btnHomeI.setText("Home");
         btnHomeI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeIActionPerformed(evt);

@@ -21,6 +21,7 @@ public class C extends javax.swing.JFrame {
      */
     public C() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -168,6 +169,7 @@ public class C extends javax.swing.JFrame {
     private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
         // TODO add your handling code here:
         try{
+            System.out.println("prueba");
             DefaultTableModel modelo;
             ConsultaC cc= new ConsultaC();
             modelo=cc.Consultar();

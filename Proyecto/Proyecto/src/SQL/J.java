@@ -21,6 +21,7 @@ public class J extends javax.swing.JFrame {
      */
     public J() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

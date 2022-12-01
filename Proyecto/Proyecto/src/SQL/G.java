@@ -16,6 +16,7 @@ public class G extends javax.swing.JFrame {
      */
     public G() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
