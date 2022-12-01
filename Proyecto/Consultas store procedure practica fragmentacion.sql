@@ -228,47 +228,72 @@ execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
 execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 >>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
 
---g
+/*********************/
+/*					 */
+/*					 */
+/*		   G		 */
+/*					 */
+/*					 */
+/*********************/
  go
-create procedure consulta_g
-(@customerID int, 
- @correo nvarchar(50)
- ) as
- begin
- if exists(
- select * 
- from PC6.AdventureWorks2019_3.Person.EmailAddress ea
- where( ea.BusinessEntityID =(
-		 SELECT BusinessEntityID 
-		 FROM PC6.AdventureWorks2019_3.person.Person
-		 where ( BusinessEntityID = (
-				 SELECT  PersonID
-				 FROM PC7.AdventureWorks2019_1.Sales.Customer
-				 where CustomerID=@customerID))))--30117
+	create procedure consulta_g
+	(@customerID int, 
+	 @correo nvarchar(50)
+	 ) as
+	 begin
+		 if exists(
+		 select * 
+		 from PC6.AdventureWorks2019_3.Person.EmailAddress ea
+		 where( ea.BusinessEntityID =(
+				 SELECT BusinessEntityID 
+				 FROM PC6.AdventureWorks2019_3.person.Person
+				 where ( BusinessEntityID = (
+						 SELECT  PersonID
+						 FROM PC7.AdventureWorks2019_1.Sales.Customer
+						 where CustomerID=@customerID))))--30117
 		 
-		 )
-update PC6.AdventureWorks2019_3.Person.EmailAddress
- set EmailAddress = @correo
-  WHERE  PC6.AdventureWorks2019_3.Person.EmailAddress.BusinessEntityID= (SELECT BusinessEntityID 
-		 FROM PC6.AdventureWorks2019_3.person.Person
-		 where ( BusinessEntityID = (
-				 SELECT  PersonID
-				 FROM PC7.AdventureWorks2019_1.Sales.Customer
-				 where CustomerID=@customerID)))
- end
+				 )
+		update PC6.AdventureWorks2019_3.Person.EmailAddress
+		 set EmailAddress = @correo
+		  WHERE  PC6.AdventureWorks2019_3.Person.EmailAddress.BusinessEntityID= (SELECT BusinessEntityID 
+				 FROM PC6.AdventureWorks2019_3.person.Person
+				 where ( BusinessEntityID = (
+						 SELECT  PersonID
+						 FROM PC7.AdventureWorks2019_1.Sales.Customer
+						 where CustomerID=@customerID)))
+	 end
 
-<<<<<<< HEAD
- execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
-=======
- execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
-
->>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
+  execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
 
 
+/*********************/
+/*					 */
+/*					 */
+/*		   G2		 */
+/*					 */
+/*					 */
+/*********************/
+ go
+	create procedure consulta_g2
+	(@customerID int
+	 ) as
+	 begin
+		 select BusinessEntityID, EmailAddress  
+		 from PC6.AdventureWorks2019_3.Person.EmailAddress ea
+		 where( ea.BusinessEntityID =(
+				 SELECT BusinessEntityID 
+				 FROM PC6.AdventureWorks2019_3.person.Person
+				 where ( BusinessEntityID = (
+						 SELECT  PersonID
+						 FROM PC7.AdventureWorks2019_1.Sales.Customer
+						 where CustomerID=@customerID))))--30117
+	 end
 
-<<<<<<< HEAD
+  execute consulta_g2 @customerID=30117 
+
+/*
  if exists(select *--productid
             from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
             WHERE productid = 776and-- and@ProductId and 
                   SalesOrderID =43659-- @OrdenId
-=======
+*/
