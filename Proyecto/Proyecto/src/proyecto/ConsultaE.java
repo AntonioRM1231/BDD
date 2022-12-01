@@ -54,10 +54,11 @@ public class ConsultaE {
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call consulta_e2(?,?,?)}");
-            csta.setInt(1, orderID);
-            csta.setInt(2, producID);
-            rs=csta.executeQuery();
+            CallableStatement csta2 = cn.prepareCall("{call consulta_e(?,?,?)}");
+            csta2.setInt(1, orderID);
+            csta2.setInt(2, producID);
+            csta2.setInt(3, cantidad);
+            rs=csta2.executeQuery();
             while(rs.next()){
                 Registro[0]=rs.getString("SalesOrderID");
                 Registro[1]=rs.getString("ProductID");

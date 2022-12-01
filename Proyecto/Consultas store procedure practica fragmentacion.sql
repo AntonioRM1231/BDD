@@ -10,16 +10,16 @@ inner join PC7.AdventureWorks2019_1.sales.SalesOrderHeader soh
 on sod.SalesOrderID = soh.SalesOrderID
 where sod.ProductID in (
     select ProductID
-	from AdventureWorks2019_2.Production.Product
+	from PC8.AdventureWorks2019_2.Production.Product
     where ProductSubcategoryID in (
          select ProductSubcategoryID
-		 from AdventureWorks2019_2.Production.ProductSubcategory
+		 from PC8.AdventureWorks2019_2.Production.ProductSubcategory
          where ProductCategoryID = @cat
        )
     )
 group by soh.TerritoryID
 end 
-execute consulta_a @cat=4
+execute consulta_a @cat=3
 
 --b
 go 
@@ -67,9 +67,11 @@ execute consulta_c2
 
 
 --d
+
 go
 create procedure consulta_d @territorio int as
  begin
+ DECLARE @resultado varchar(50)
   if exists(
 	select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
 	from PC7.AdventureWorks2019_1.Sales.Customer c 
@@ -78,9 +80,12 @@ create procedure consulta_d @territorio int as
 	where  c.TerritoryID= @territorio
 
 	)
-	PRINT ' si hay clientes'
+	--PRINT ' si hay clientes'
+	set @resultado = 'Si hay clientes'
 	ELSE 
-	PRINT ' no hay clientes'
+	--PRINT ' no hay clientes'
+	set @resultado= 'No hay clientes'
+	select @resultado as Resultado
  end
 execute consulta_d @territorio = 8
 
@@ -99,7 +104,7 @@ go
 create procedure consulta_e
 (@OrdenId int, 
  @ProductId int,
- @Cantidad smallint
+ @Cantidad int
  ) as
  begin
  if exists(select productid
@@ -118,13 +123,13 @@ create procedure consulta_e
 
  --e2
  go
-create procedure consulta_e2
+ create procedure consulta_e2
 (@OrdenId int, 
  @ProductId int
  ) as
  begin
 select SalesOrderID,ProductId,OrderQty
-from AdventureWorks2019_1.sales.SalesOrderDetail
+from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
 WHERE productid = @ProductId and 
 SalesOrderID =@OrdenId
 end
@@ -177,7 +182,7 @@ begin
 		where OrderDate between @fecha_1 AND @fecha_2
 	group by sst."Group"
 end
-execute consulta_i @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+execute consulta_i @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 --j
 go
 create procedure consulta_j @fecha_1 datetime, @fecha_2 datetime as
@@ -191,7 +196,7 @@ group by sod.ProductID
 order by ventas asc
 end
 
-execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 
 --g
  go
@@ -223,3 +228,4 @@ update AdventureWorks2019_3.Person.EmailAddress
  end
 
  execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
+

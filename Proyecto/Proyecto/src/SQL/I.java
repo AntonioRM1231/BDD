@@ -201,8 +201,8 @@ public class I extends javax.swing.JFrame {
             ConsultaI cj= new ConsultaI();
             String mes = (String)mesInicio.getSelectedItem();
             String mesF = (String)mesFinal.getSelectedItem();
-            String fechaInicio = anioInicio.getText()+"-"+mes+"-"+diaInicio.getText();
-            String fechaFinal = anioFinal.getText()+"-"+mesF+"-"+diaFinal.getText();
+            String fechaInicio = diaInicio.getText()+"/"+mes+"/"+anioInicio.getText();
+            String fechaFinal = diaFinal.getText()+"/"+mesF+"/"+anioFinal.getText();
             modelo = cj.Consultar(fechaInicio, fechaFinal);
             tblI.setModel(modelo);
             

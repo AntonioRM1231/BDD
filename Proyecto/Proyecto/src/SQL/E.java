@@ -176,10 +176,10 @@ public class E extends javax.swing.JFrame {
         int cant = parseInt(JOptionPane.showInputDialog("Ingrese la nueva cantidad"));
         try{
             DefaultTableModel modelo;
-            ConsultaE ce= new ConsultaE();
+            ConsultaE ce2= new ConsultaE();
             int prodID = parseInt(txtNumOrd.getText());
             int ordID = parseInt(txtProID.getText());
-            modelo=ce.Consultar2(prodID, ordID, cant);
+            modelo=ce2.Consultar2(prodID, ordID, cant);
             tblE.setModel(modelo);
             
         }catch(Exception e){
