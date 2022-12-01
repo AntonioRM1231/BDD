@@ -1,6 +1,10 @@
---a
-DROP PROCEDURE consulta_h;
-GO
+/*********************/
+/*                   */
+/*                   */
+/*         A         */
+/*                   */
+/*                   */
+/*********************/
 go 
 create procedure consulta_a @cat int as 
 begin
@@ -21,6 +25,14 @@ group by soh.TerritoryID
 end 
 execute consulta_a @cat=3
 
+
+/*********************/
+/*                   */
+/*                   */
+/*         B         */
+/*                   */
+/*                   */
+/*********************/
 --b
 go 
 create procedure consulta_b @region nvarchar(50) as 
@@ -38,9 +50,16 @@ begin
 end
 execute consulta_b @region='Europe'
 
+
+/*********************/
+/*                   */
+/*                   */
+/*         C         */
+/*                   */
+/*                   */
+/*********************/
 --c
-select * from PC8.AdventureWorks2019_2.Production.ProductSubcategory
-select * from PC8.AdventureWorks2019_2.Production.ProductInventory
+
 go 
 CREATE PROCEDURE consulta_c (@categoria int, @localidad int) as
 begin
@@ -65,7 +84,13 @@ end
 execute consulta_c2
 
 
-
+/*********************/
+/*                   */
+/*                   */
+/*         D         */
+/*                   */
+/*                   */
+/*********************/
 --d
 
 go
@@ -89,6 +114,13 @@ create procedure consulta_d @territorio int as
  end
 execute consulta_d @territorio = 8
 
+/*********************/
+/*                   */
+/*                   */
+/*     SP_P1_4       */
+/*                   */
+/*                   */
+/*********************/
 go
 create procedure sp_p1_4 @territorio int as
  begin
@@ -99,6 +131,14 @@ create procedure sp_p1_4 @territorio int as
 	where  c.TerritoryID= @territorio
  end
  execute sp_p1_4 @territorio = 8
+
+/*********************/
+/*                   */
+/*                   */
+/*         E         */
+/*                   */
+/*                   */
+/*********************/
 --e
 go
 create procedure consulta_e
@@ -119,22 +159,14 @@ create procedure consulta_e
  ELSE 
  PRINT 'Orden o Producto no encontrado'
  end
- --e2
---	go
---create procedure consulta_e2
---(@OrdenId int, 
---	@ProductId int
---	) as
---	begin
---select SalesOrderID,ProductId,OrderQty
---from AdventureWorks2019_1.sales.SalesOrderDetail
---WHERE productid = @ProductId and 
---SalesOrderID =@OrdenId
---end
- 
- -- EJECUTAR EL PROCEDIMIENTO 
- EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
-
+  EXECUTE consulta_e   @OrdenId = 43659, @productId = 776, @Cantidad =8 
+/*********************/
+/*                   */
+/*                   */
+/*        E2         */
+/*                   */
+/*                   */
+/*********************/
  --e2
  go
  create procedure consulta_e2
@@ -150,7 +182,15 @@ end
  
  -- EJECUTAR EL PROCEDIMIENTO 
  EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
---f
+
+
+/*********************/
+/*                   */
+/*                   */
+/*         F         */
+/*                   */
+/*                   */
+/*********************/
 go
 create procedure consulta_f --Modifica la tabla
 (@shipMethodID int, 
@@ -169,6 +209,13 @@ create procedure consulta_f --Modifica la tabla
  end
  EXECUTE consulta_f  @shipMethodID=4, @SalesOrderID = 43659--1
 
+/*********************/
+/*                   */
+/*                   */
+/*        F2         */
+/*                   */
+/*                   */
+/*********************/
  go
 create  procedure consulta_f2 --Solo ver
 
@@ -182,58 +229,13 @@ create  procedure consulta_f2 --Solo ver
 end
  EXECUTE consulta_f2  @SalesOrderID = 43659--1
 
-select * 
-from AdventureWorks2019.sales.SalesOrderHeader
---g
---h
-go
-create procedure consulta_h @territorio int as
-begin
-	select top 1 SalesPersonID, COUNT(SalesPersonID)Ordenes, TerritoryID from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader
-	where TerritoryID = @territorio
-	group by SalesPersonID,TerritoryID
-	order by Ordenes desc
-end
-execute consulta_h @territorio= 5
---i
-go
-create procedure consulta_i @fecha_1 datetime, @fecha_2 datetime as
-begin
-	select sst."Group", sum(sod.LineTotal) as ventas
-	from PC7.AdventureWorks2019_1.sales.SalesOrderHeader soh
-	inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
-	on soh.SalesOrderID = sod.SalesOrderID
-	inner join PC7.AdventureWorks2019_1.sales.SalesTerritory sst
-	on soh.TerritoryID = sst.TerritoryID
-		where OrderDate between @fecha_1 AND @fecha_2
-	group by sst."Group"
-end
-execute consulta_i @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
---j
-go
-create procedure consulta_j @fecha_1 datetime, @fecha_2 datetime as
-begin
-select  top 5 sod.ProductID,sum(sod.LineTotal) ventas
-from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
-inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
-on soh.SalesOrderID = sod.SalesOrderID
-where  OrderDate BETWEEN  @fecha_1 AND @fecha_2
-group by sod.ProductID
-order by ventas asc
-end
-
-<<<<<<< HEAD
-execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
-=======
-execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
->>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
 
 /*********************/
-/*					 */
-/*					 */
-/*		   G		 */
-/*					 */
-/*					 */
+/*                   */
+/*                   */
+/*         G         */
+/*                   */
+/*                   */
 /*********************/
  go
 	create procedure consulta_g
@@ -267,11 +269,11 @@ execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 
 
 /*********************/
-/*					 */
-/*					 */
-/*		   G2		 */
-/*					 */
-/*					 */
+/*                   */
+/*                   */
+/*         G2        */
+/*                   */
+/*                   */
 /*********************/
  go
 	create procedure consulta_g2
@@ -291,9 +293,69 @@ execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 
   execute consulta_g2 @customerID=30117 
 
-/*
- if exists(select *--productid
-            from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
-            WHERE productid = 776and-- and@ProductId and 
-                  SalesOrderID =43659-- @OrdenId
-*/
+/*********************/
+/*                   */
+/*                   */
+/*         H         */
+/*                   */
+/*                   */
+/*********************/
+--h
+go
+create procedure consulta_h @territorio int as
+begin
+	select top 1 SalesPersonID, COUNT(SalesPersonID)Ordenes, TerritoryID from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader
+	where TerritoryID = @territorio
+	group by SalesPersonID,TerritoryID
+	order by Ordenes desc
+end
+execute consulta_h @territorio= 5
+
+/*********************/
+/*                   */
+/*                   */
+/*         I         */
+/*                   */
+/*                   */
+/*********************/
+--i
+go
+create procedure consulta_i @fecha_1 datetime, @fecha_2 datetime as
+begin
+	select sst."Group", sum(sod.LineTotal) as ventas
+	from PC7.AdventureWorks2019_1.sales.SalesOrderHeader soh
+	inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+	on soh.SalesOrderID = sod.SalesOrderID
+	inner join PC7.AdventureWorks2019_1.sales.SalesTerritory sst
+	on soh.TerritoryID = sst.TerritoryID
+		where OrderDate between @fecha_1 AND @fecha_2
+	group by sst."Group"
+end
+
+execute consulta_i @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
+
+/*********************/
+/*                   */
+/*                   */
+/*         J         */
+/*                   */
+/*                   */
+/*********************/
+--j
+
+go
+create procedure consulta_j @fecha_1 datetime, @fecha_2 datetime as
+begin
+	select  top 5 sod.ProductID,sum(sod.LineTotal) ventas
+	from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+	on soh.SalesOrderID = sod.SalesOrderID
+	where  OrderDate BETWEEN  @fecha_1 AND @fecha_2
+	group by sod.ProductID
+	order by ventas asc
+end
+
+
+execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+
+execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
