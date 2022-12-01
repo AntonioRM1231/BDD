@@ -26,11 +26,11 @@ go
 create procedure consulta_b @region nvarchar(50) as 
 begin
 	select top 1 sod.ProductID, soh.TerritoryID,sum(sod.LineTotal)as ventas 
-	from PC7.PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
-	inner join PC7.PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	from PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on sod.SalesOrderID=soh.SalesOrderID
 		where soh.TerritoryID in(
-			select TerritoryID from PC7.PC7.AdventureWorks2019_1.sales.SalesTerritory
+			select TerritoryID from PC7.AdventureWorks2019_1.sales.SalesTerritory
 			where "Group"=@region
 		)
 	group by sod.ProductID, soh.TerritoryID
@@ -152,7 +152,7 @@ end
  EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
 --f
 go
-create procedure consulta_f
+create procedure consulta_f --Modifica la tabla
 (@shipMethodID int, 
  @salesorderID int
  ) as
@@ -167,18 +167,20 @@ create procedure consulta_f
  ELSE 
  PRINT 'SalesOrderID no encontrado'
  end
+ EXECUTE consulta_f  @shipMethodID=4, @SalesOrderID = 43659--1
 
  go
-create procedure consulta_f2
-(@shipMethodID int, 
+create  procedure consulta_f2 --Solo ver
+
+(
  @salesorderID int
  ) as
  begin
- select soh.SalesOrderID
+ select soh.SalesOrderID, soh.ShipMethodID
             from PC7.AdventureWorks2019_1.sales.SalesOrderheader soh
             WHERE SalesOrderID= @salesorderID 
 end
- EXECUTE consulta_f2 @shipMethodID = 4, @SalesOrderID = 43659--1
+ EXECUTE consulta_f2  @SalesOrderID = 43659--1
 
 select * 
 from AdventureWorks2019.sales.SalesOrderHeader
@@ -235,23 +237,23 @@ create procedure consulta_g
  begin
  if exists(
  select * 
- from AdventureWorks2019_3.Person.EmailAddress ea
+ from PC6.AdventureWorks2019_3.Person.EmailAddress ea
  where( ea.BusinessEntityID =(
 		 SELECT BusinessEntityID 
-		 FROM AdventureWorks2019_3.person.Person
+		 FROM PC6.AdventureWorks2019_3.person.Person
 		 where ( BusinessEntityID = (
 				 SELECT  PersonID
-				 FROM AdventureWorks2019_1.Sales.Customer
+				 FROM PC7.AdventureWorks2019_1.Sales.Customer
 				 where CustomerID=@customerID))))--30117
 		 
 		 )
-update AdventureWorks2019_3.Person.EmailAddress
+update PC6.AdventureWorks2019_3.Person.EmailAddress
  set EmailAddress = @correo
-  WHERE  AdventureWorks2019_3.Person.EmailAddress.BusinessEntityID= (SELECT BusinessEntityID 
-		 FROM AdventureWorks2019_3.person.Person
+  WHERE  PC6.AdventureWorks2019_3.Person.EmailAddress.BusinessEntityID= (SELECT BusinessEntityID 
+		 FROM PC6.AdventureWorks2019_3.person.Person
 		 where ( BusinessEntityID = (
 				 SELECT  PersonID
-				 FROM AdventureWorks2019_1.Sales.Customer
+				 FROM PC7.AdventureWorks2019_1.Sales.Customer
 				 where CustomerID=@customerID)))
  end
 
@@ -266,7 +268,7 @@ update AdventureWorks2019_3.Person.EmailAddress
 
 <<<<<<< HEAD
  if exists(select *--productid
-            from AdventureWorks2019_1.sales.SalesOrderDetail
+            from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
             WHERE productid = 776and-- and@ProductId and 
                   SalesOrderID =43659-- @OrdenId
 =======
