@@ -32,6 +32,7 @@ public class ConsultaC {
             
             CallableStatement csta = cn.prepareCall("{call consulta_c2()}");
             rs = csta.executeQuery();
+            cn.close();
             while(rs.next()){
                 Registro[0]=rs.getString("ProductID");
                 Registro[1]=rs.getString("LocationID");

@@ -21,20 +21,21 @@ public class ConsultaE {
     private Conexion con = new Conexion();
     private Connection cn = con.getConexion();
     
-    public DefaultTableModel Consultar(String reg){
+    public DefaultTableModel Consultar(int orderID, int producID){
         DefaultTableModel modelo;
-        String [] titulos = {"Producto ID","Territorio","Ventas"};
+        String [] titulos = {"Sales Order ID","Product ID","Order Qty"};
         String [] Registro = new String[3];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_2(?)}");
-            csta.setString(1, reg);
+            CallableStatement csta = cn.prepareCall("{call consulta_e2(?,?)}");
+            csta.setInt(1, orderID);
+            csta.setInt(2, producID);
             rs=csta.executeQuery();
             while(rs.next()){
-                Registro[0]=rs.getString("ProductID");
-                Registro[1]=rs.getString("TerritoryID");
-                Registro[2]=rs.getString("ventas");
+                Registro[0]=rs.getString("SalesOrderID");
+                Registro[1]=rs.getString("ProductID");
+                Registro[2]=rs.getString("OrderQty");
                 
                 modelo.addRow(Registro);
             }
@@ -44,4 +45,33 @@ public class ConsultaE {
             return null;
         }
     }
+    
+    
+    public DefaultTableModel Consultar2(int orderID, int producID, int cantidad){
+        DefaultTableModel modelo;
+        String [] titulos = {"Sales Order ID","Product ID","Order Qty"};
+        String [] Registro = new String[3];
+        modelo= new DefaultTableModel(null,titulos);
+        
+        try{
+            CallableStatement csta2 = cn.prepareCall("{call consulta_e(?,?,?)}");
+            csta2.setInt(1, orderID);
+            csta2.setInt(2, producID);
+            csta2.setInt(3, cantidad);
+            rs=csta2.executeQuery();
+            while(rs.next()){
+                Registro[0]=rs.getString("SalesOrderID");
+                Registro[1]=rs.getString("ProductID");
+                Registro[2]=rs.getString("OrderQty");
+                
+                modelo.addRow(Registro);
+            }
+            return modelo;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    
 }

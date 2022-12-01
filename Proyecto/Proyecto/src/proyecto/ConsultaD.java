@@ -24,19 +24,49 @@ public class ConsultaD {
     public String Consultar(int terr){
         //DefaultTableModel modelo;
         //String [] titulos = {"Producto ID","Territorio","Ventas"};
-        //String [] Registro = new String[3];
         //modelo= new DefaultTableModel(null,titulos);
-        
+        /*
+        System.out.println("hola mundo222");
         try{
-            
-            CallableStatement csta = cn.prepareCall("{call sp_p1_4(?)}");
+            System.out.println("hola mundo");
+            CallableStatement csta = cn.prepareCall("{call consulta_d(?)}");
             csta.setInt(1, terr);
             rs=csta.executeQuery();
-            return "Si hay clientes";
+            System.out.println("valooooor: ");
+            System.out.println(rs.getInt(0));
+            if(rs.getInt(0)==1){
+                return "Si hay clientes uwu";
+            }else {
+                return "No hay clientes unu";
+            }
+            
         }catch(Exception e){
             //JOptionPane.showMessageDialog(null, e);
             //return null;
-            return "No hay clientes";
+            return "catch";
+        }
+*/
+        return "esto es una prueba";
+    }
+    public DefaultTableModel Consultar2(int terr){
+      
+        DefaultTableModel modelo;
+        String [] titulos = {"Resultado"};
+        String [] Registro = new String[1];
+        modelo= new DefaultTableModel(null,titulos);
+        try{
+            CallableStatement csta= cn.prepareCall("{call consulta_d(?)}");
+            csta.setInt(1, terr);
+            rs =csta.executeQuery();
+            while(rs.next()){
+                Registro[0]=rs.getString("Resultado");
+                
+                modelo.addRow(Registro);
+            }
+            return modelo;
+//
+        }catch(Exception e){
+                return null;
         }
     }
 }

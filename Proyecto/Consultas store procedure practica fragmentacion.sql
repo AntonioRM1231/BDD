@@ -5,32 +5,32 @@ go
 create procedure consulta_a @cat int as 
 begin
 select soh.TerritoryID, sum(sod.linetotal) as VentasTotales
-from AdventureWorks2019_1.sales.SalesOrderDetail sod
-inner join AdventureWorks2019_1.sales.SalesOrderHeader soh
+from PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+inner join PC7.AdventureWorks2019_1.sales.SalesOrderHeader soh
 on sod.SalesOrderID = soh.SalesOrderID
 where sod.ProductID in (
     select ProductID
-	from AdventureWorks2019_2.Production.Product
+	from PC8.AdventureWorks2019_2.Production.Product
     where ProductSubcategoryID in (
          select ProductSubcategoryID
-		 from AdventureWorks2019_2.Production.ProductSubcategory
+		 from PC8.AdventureWorks2019_2.Production.ProductSubcategory
          where ProductCategoryID = @cat
        )
     )
 group by soh.TerritoryID
 end 
-execute consulta_a @cat=4
+execute consulta_a @cat=3
 
 --b
 go 
 create procedure consulta_b @region nvarchar(50) as 
 begin
 	select top 1 sod.ProductID, soh.TerritoryID,sum(sod.LineTotal)as ventas 
-	from PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
-	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	from PC7.PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
+	inner join PC7.PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on sod.SalesOrderID=soh.SalesOrderID
 		where soh.TerritoryID in(
-			select TerritoryID from PC7.AdventureWorks2019_1.sales.SalesTerritory
+			select TerritoryID from PC7.PC7.AdventureWorks2019_1.sales.SalesTerritory
 			where "Group"=@region
 		)
 	group by sod.ProductID, soh.TerritoryID
@@ -39,38 +39,53 @@ end
 execute consulta_b @region='Europe'
 
 --c
-select * from  AdventureWorks2019_2.Production.ProductCategory
+select * from PC8.AdventureWorks2019_2.Production.ProductSubcategory
+select * from PC8.AdventureWorks2019_2.Production.ProductInventory
 go 
 CREATE PROCEDURE consulta_c (@categoria int, @localidad int) as
 begin
-	update AdventureWorks2019_2.Production.ProductInventory
+	update PC8.AdventureWorks2019_2.Production.ProductInventory
 	set Quantity = Quantity*1.05
 	where LocationID = @localidad
 	and ProductID in(select ProductID
-					from AdventureWorks2019_2.Production.Product
+					from PC8.AdventureWorks2019_2.Production.Product
 					where ProductSubcategoryID in (
 					select ProductSubcategoryID
-					from AdventureWorks2019_2.production.ProductSubcategory
+					from PC8.AdventureWorks2019_2.production.ProductSubcategory
 					where ProductCategoryID = @categoria
 					))
 end
-execute consulta_c @categoria=1, @localidad = 1
+execute consulta_c @categoria=2, @localidad = 60
+--c prima
+go
+create procedure consulta_c2 as
+begin
+	select * from PC8.AdventureWorks2019_2.Production.ProductInventory
+end
+execute consulta_c2
+
+
 
 --d
+
 go
 create procedure consulta_d @territorio int as
  begin
+ DECLARE @resultado varchar(50)
   if exists(
 	select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
-	from AdventureWorks2019_1.Sales.Customer c 
-	inner join AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	from PC7.AdventureWorks2019_1.Sales.Customer c 
+	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on c.CustomerID =soh.CustomerID and c.TerritoryID<>soh.TerritoryID
 	where  c.TerritoryID= @territorio
 
 	)
-	PRINT ' si hay clientes'
+	--PRINT ' si hay clientes'
+	set @resultado = 'Si hay clientes'
 	ELSE 
-	PRINT ' no hay clientes'
+	--PRINT ' no hay clientes'
+	set @resultado= 'No hay clientes'
+	select @resultado as Resultado
  end
 execute consulta_d @territorio = 8
 
@@ -78,8 +93,8 @@ go
 create procedure sp_p1_4 @territorio int as
  begin
 	select (c.CustomerID) CIDc , (c.TerritoryID) TIDc,(soh.CustomerID) CIDs , (soh.TerritoryID) TIDs  
-	from AdventureWorks2019_1.Sales.Customer c 
-	inner join AdventureWorks2019_1.Sales.SalesOrderHeader soh
+	from PC7.AdventureWorks2019_1.Sales.Customer c 
+	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on c.CustomerID =soh.CustomerID and c.TerritoryID<>soh.TerritoryID
 	where  c.TerritoryID= @territorio
  end
@@ -89,15 +104,22 @@ go
 create procedure consulta_e
 (@OrdenId int, 
  @ProductId int,
- @Cantidad smallint
+ @Cantidad int
  ) as
  begin
+<<<<<<< HEAD
  if exists(select *--productid
             from AdventureWorks2019_1.sales.SalesOrderDetail
             WHERE productid = 776and-- and@ProductId and 
                   SalesOrderID =43659-- @OrdenId
+=======
+ if exists(select productid
+            from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
+            WHERE productid = @ProductId and 
+                  SalesOrderID = @OrdenId
+>>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
  )
- update AdventureWorks2019_1.sales.SalesOrderDetail
+ update PC7.AdventureWorks2019_1.sales.SalesOrderDetail
  set OrderQty = @Cantidad
  WHERE ProductID=@ProductId and SalesOrderID = @OrdenId
  ELSE 
@@ -119,6 +141,21 @@ end
  -- EJECUTAR EL PROCEDIMIENTO 
  EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
 
+ --e2
+ go
+ create procedure consulta_e2
+(@OrdenId int, 
+ @ProductId int
+ ) as
+ begin
+select SalesOrderID,ProductId,OrderQty
+from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
+WHERE productid = @ProductId and 
+SalesOrderID =@OrdenId
+end
+ 
+ -- EJECUTAR EL PROCEDIMIENTO 
+ EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
 --f
 go
 create procedure consulta_f
@@ -127,10 +164,10 @@ create procedure consulta_f
  ) as
  begin
  if exists(select soh.SalesOrderID
-            from AdventureWorks2019_1.sales.SalesOrderheader soh
+            from PC7.AdventureWorks2019_1.sales.SalesOrderheader soh
             WHERE SalesOrderID= @salesorderID 
 		 )
- update AdventureWorks2019_1.sales.SalesOrderHeader
+ update PC7.AdventureWorks2019_1.sales.SalesOrderHeader
  set ShipMethodID = @shipMethodID
  WHERE SalesOrderID=@salesorderID 
  ELSE 
@@ -156,7 +193,7 @@ from AdventureWorks2019.sales.SalesOrderHeader
 go
 create procedure consulta_h @territorio int as
 begin
-	select top 1 SalesPersonID, COUNT(SalesPersonID)Ordenes, TerritoryID from AdventureWorks2019_1.Sales.SalesOrderHeader
+	select top 1 SalesPersonID, COUNT(SalesPersonID)Ordenes, TerritoryID from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader
 	where TerritoryID = @territorio
 	group by SalesPersonID,TerritoryID
 	order by Ordenes desc
@@ -167,29 +204,33 @@ go
 create procedure consulta_i @fecha_1 datetime, @fecha_2 datetime as
 begin
 	select sst."Group", sum(sod.LineTotal) as ventas
-	from AdventureWorks2019_1.sales.SalesOrderHeader soh
-	inner join AdventureWorks2019_1.sales.SalesOrderDetail sod
+	from PC7.AdventureWorks2019_1.sales.SalesOrderHeader soh
+	inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
 	on soh.SalesOrderID = sod.SalesOrderID
-	inner join AdventureWorks2019_1.sales.SalesTerritory sst
+	inner join PC7.AdventureWorks2019_1.sales.SalesTerritory sst
 	on soh.TerritoryID = sst.TerritoryID
 		where OrderDate between @fecha_1 AND @fecha_2
 	group by sst."Group"
 end
-execute consulta_i @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+execute consulta_i @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 --j
 go
 create procedure consulta_j @fecha_1 datetime, @fecha_2 datetime as
 begin
 select  top 5 sod.ProductID,sum(sod.LineTotal) ventas
-from AdventureWorks2019_1.Sales.SalesOrderHeader soh
-inner join AdventureWorks2019_1.sales.SalesOrderDetail sod
+from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
+inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
 on soh.SalesOrderID = sod.SalesOrderID
 where  OrderDate BETWEEN  @fecha_1 AND @fecha_2
 group by sod.ProductID
 order by ventas asc
 end
 
+<<<<<<< HEAD
 execute consulta_j @fecha_1 = '2011-05-01', @fecha_2 = '2011-05-31'
+=======
+execute consulta_j  @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
+>>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
 
 --g
  go
@@ -220,4 +261,9 @@ update AdventureWorks2019_3.Person.EmailAddress
 				 where CustomerID=@customerID)))
  end
 
+<<<<<<< HEAD
  execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
+=======
+ execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
+
+>>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
