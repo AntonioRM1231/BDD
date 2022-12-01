@@ -9,6 +9,8 @@ import SQL.Conexion;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,20 +23,49 @@ public class ConsultaF {
     private Conexion con = new Conexion();
     private Connection cn = con.getConexion();
     
-    public DefaultTableModel Consultar(String reg){
+    public void Cambiar(int method,int sales){
+        //DefaultTableModel modelo;
+        //String [] titulos = {"Sales Order ID","Ship Method"};
+        //String [] Registro = new String[2];
+        //modelo= new DefaultTableModel(null,titulos);
+        
+        try{
+            CallableStatement csta = cn.prepareCall("{call consulta_f(?,?)}");
+            csta.setInt(1,method);
+            csta.setInt(2,sales);
+            rs=csta.executeQuery();
+            /*
+            while(rs.next()){
+                Registro[0]=String.valueOf(rs.getInt("SalesOrderID"));
+                Registro[1]=String.valueOf(rs.getInt("ShipMethod"));
+                
+                modelo.addRow(Registro);
+            }*/
+            //return modelo;
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            
+        }
+    }
+    
+    
+    
+    
+    ///////
+    public DefaultTableModel Consultar(int sales){
         DefaultTableModel modelo;
-        String [] titulos = {"Producto ID","Territorio","Ventas"};
-        String [] Registro = new String[3];
+        String [] titulos = {"Sales Order ID","Ship Method"};
+        String [] Registro = new String[2];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call sp_p1_2(?)}");
-            csta.setString(1, reg);
+            CallableStatement csta = cn.prepareCall("{call consulta_f2(?)}");
+            csta.setInt(1,sales);
             rs=csta.executeQuery();
             while(rs.next()){
-                Registro[0]=rs.getString("ProductID");
-                Registro[1]=rs.getString("TerritoryID");
-                Registro[2]=rs.getString("ventas");
+                Registro[0]=String.valueOf(rs.getInt("SalesOrderID"));
+                Registro[1]=String.valueOf(rs.getInt("ShipMethod"));
                 
                 modelo.addRow(Registro);
             }
