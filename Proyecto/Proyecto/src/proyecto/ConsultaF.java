@@ -43,6 +43,7 @@ public class ConsultaF {
             }*/
             //return modelo;
             
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
             
@@ -53,20 +54,19 @@ public class ConsultaF {
     
     
     ///////
-    public DefaultTableModel Consultar(int sales, int method){
+    public DefaultTableModel Consultar(int sales){
         DefaultTableModel modelo;
         String [] titulos = {"Sales Order ID","Ship Method"};
         String [] Registro = new String[2];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call consulta_f2(?,?)}");
+            CallableStatement csta = cn.prepareCall("{call consulta_f2(?)}");
             csta.setInt(1,sales);
-            csta.setInt(2,method);
             rs=csta.executeQuery();
             while(rs.next()){
                 Registro[0]=String.valueOf(rs.getInt("SalesOrderID"));
-                Registro[1]=String.valueOf(rs.getInt("ShipMethod"));
+                Registro[1]=String.valueOf(rs.getInt("ShipMethodID"));
                 
                 modelo.addRow(Registro);
             }

@@ -6,6 +6,7 @@
 package SQL;
 
 import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyecto.ConsultaC;
 import proyecto.ConsultaF;
@@ -34,14 +35,12 @@ public class F extends javax.swing.JFrame {
 
         btnHomeF = new javax.swing.JButton();
         txtOrder = new javax.swing.JTextField();
-        txtMet = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnConsultar = new javax.swing.JButton();
-        btnCambiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblF = new javax.swing.JTable();
+        btnCambiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,8 +59,6 @@ public class F extends javax.swing.JFrame {
 
         jLabel1.setText("SalesOrderID:");
 
-        jLabel2.setText("ShipMethodID:");
-
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel3.setText("Consulta F ");
 
@@ -69,13 +66,6 @@ public class F extends javax.swing.JFrame {
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
-            }
-        });
-
-        btnCambiar.setText("Cambiar");
-        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiarActionPerformed(evt);
             }
         });
 
@@ -92,6 +82,13 @@ public class F extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblF);
 
+        btnCambiar.setText("Modificar");
+        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,30 +97,26 @@ public class F extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(btnCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCambiar)
+                                        .addGap(138, 138, 138))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addGap(7, 7, 7)
-                                        .addComponent(txtOrder)
+                                        .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnConsultar)
-                                        .addGap(30, 30, 30)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnHomeF)
-                                    .addComponent(txtMet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19))))
+                                        .addGap(30, 30, 30)
+                                        .addComponent(btnHomeF)))
+                                .addGap(39, 39, 39))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(jLabel3)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,14 +129,11 @@ public class F extends javax.swing.JFrame {
                     .addComponent(btnHomeF)
                     .addComponent(txtOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnCambiar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(btnCambiar)
+                .addGap(61, 61, 61))
         );
 
         pack();
@@ -156,20 +146,10 @@ public class F extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnHomeFActionPerformed
 
-    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
-        // TODO add your handling code here:
-        try{
-            ConsultaF cf= new ConsultaF();
-            cf.Cambiar(parseInt(txtMet.getText()),parseInt(txtOrder.getText()));
-        }catch(Exception e){
-            
-        }
-    }//GEN-LAST:event_btnCambiarActionPerformed
-
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
        try{
             ConsultaF cf= new ConsultaF();
-            cf.Consultar(parseInt(txtOrder.getText()),parseInt(txtMet.getText()));
+            cf.Consultar(parseInt(txtOrder.getText()));
         }catch(Exception e){
             
         }
@@ -178,6 +158,17 @@ public class F extends javax.swing.JFrame {
     private void txtOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrderActionPerformed
+
+    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
+        // TODO add your handling code here:
+        int method =  parseInt(JOptionPane.showInputDialog("Ingrese el ShipMethod nuevo:"));
+        try{
+            ConsultaF cf= new ConsultaF();
+            cf.Cambiar(method,parseInt(txtOrder.getText()));
+        }catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_btnCambiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,11 +210,9 @@ public class F extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnHomeF;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblF;
-    private javax.swing.JTextField txtMet;
     private javax.swing.JTextField txtOrder;
     // End of variables declaration//GEN-END:variables
 }
