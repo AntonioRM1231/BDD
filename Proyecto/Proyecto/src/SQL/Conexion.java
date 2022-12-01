@@ -19,7 +19,7 @@ public class Conexion {
                 + "database=AdventureWorks2019_3;"
                 + "user=alumno;"
                 + "password=Estudiante;"
-                + "loginTimeout=30;"
+                + "loginTimeout=50;"
                 + "trustservercertificate=true";
     
         try{

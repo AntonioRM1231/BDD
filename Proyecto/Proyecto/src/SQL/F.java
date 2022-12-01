@@ -148,7 +148,9 @@ public class F extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeFActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-       try{
+       System.out.println("fuera-try");
+        try{
+            System.out.println("try");
             ConsultaF cf= new ConsultaF();
             cf.Consultar(parseInt(txtOrder.getText()));
         }catch(Exception e){

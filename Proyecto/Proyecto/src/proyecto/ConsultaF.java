@@ -59,8 +59,9 @@ public class ConsultaF {
         String [] titulos = {"Sales Order ID","Ship Method"};
         String [] Registro = new String[2];
         modelo= new DefaultTableModel(null,titulos);
-        
+        System.out.println("fuera-try");
         try{
+            System.out.println("try");
             CallableStatement csta = cn.prepareCall("{call consulta_f2(?)}");
             csta.setInt(1,sales);
             rs=csta.executeQuery();
