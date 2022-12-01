@@ -22,6 +22,7 @@ public class E extends javax.swing.JFrame {
      */
     public E() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

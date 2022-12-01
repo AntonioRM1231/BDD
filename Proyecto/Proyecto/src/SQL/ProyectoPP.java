@@ -21,6 +21,7 @@ public class ProyectoPP extends javax.swing.JFrame {
      */
     public ProyectoPP() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

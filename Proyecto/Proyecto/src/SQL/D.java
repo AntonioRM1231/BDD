@@ -20,6 +20,7 @@ public class D extends javax.swing.JFrame {
      */
     public D() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
