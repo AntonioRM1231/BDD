@@ -53,15 +53,16 @@ public class ConsultaF {
     
     
     ///////
-    public DefaultTableModel Consultar(int sales){
+    public DefaultTableModel Consultar(int sales, int method){
         DefaultTableModel modelo;
         String [] titulos = {"Sales Order ID","Ship Method"};
         String [] Registro = new String[2];
         modelo= new DefaultTableModel(null,titulos);
         
         try{
-            CallableStatement csta = cn.prepareCall("{call consulta_f2(?)}");
+            CallableStatement csta = cn.prepareCall("{call consulta_f2(?,?)}");
             csta.setInt(1,sales);
+            csta.setInt(2,method);
             rs=csta.executeQuery();
             while(rs.next()){
                 Registro[0]=String.valueOf(rs.getInt("SalesOrderID"));
