@@ -107,17 +107,11 @@ create procedure consulta_e
  @Cantidad int
  ) as
  begin
-<<<<<<< HEAD
- if exists(select *--productid
-            from AdventureWorks2019_1.sales.SalesOrderDetail
-            WHERE productid = 776and-- and@ProductId and 
-                  SalesOrderID =43659-- @OrdenId
-=======
+
  if exists(select productid
             from PC7.AdventureWorks2019_1.sales.SalesOrderDetail
             WHERE productid = @ProductId and 
                   SalesOrderID = @OrdenId
->>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
  )
  update PC7.AdventureWorks2019_1.sales.SalesOrderDetail
  set OrderQty = @Cantidad
@@ -126,17 +120,17 @@ create procedure consulta_e
  PRINT 'Orden o Producto no encontrado'
  end
  --e2
- go
-create procedure consulta_e2
-(@OrdenId int, 
- @ProductId int
- ) as
- begin
-select SalesOrderID,ProductId,OrderQty
-from AdventureWorks2019_1.sales.SalesOrderDetail
-WHERE productid = @ProductId and 
-SalesOrderID =@OrdenId
-end
+--	go
+--create procedure consulta_e2
+--(@OrdenId int, 
+--	@ProductId int
+--	) as
+--	begin
+--select SalesOrderID,ProductId,OrderQty
+--from AdventureWorks2019_1.sales.SalesOrderDetail
+--WHERE productid = @ProductId and 
+--SalesOrderID =@OrdenId
+--end
  
  -- EJECUTAR EL PROCEDIMIENTO 
  EXECUTE consulta_e2 @productId = 776, @OrdenId = 43659
@@ -181,9 +175,9 @@ create procedure consulta_f2
  ) as
  begin
  select soh.SalesOrderID
-            from AdventureWorks2019_1.sales.SalesOrderheader soh
+            from PC7.AdventureWorks2019_1.sales.SalesOrderheader soh
             WHERE SalesOrderID= @salesorderID 
-		 
+end
  EXECUTE consulta_f2 @shipMethodID = 4, @SalesOrderID = 43659--1
 
 select * 
@@ -267,3 +261,12 @@ update AdventureWorks2019_3.Person.EmailAddress
  execute consulta_g @correo='labuena@prueba.com',@customerID=30117 
 
 >>>>>>> f5b72aadad159217f4e8fa850204de2936ac33f3
+
+
+
+<<<<<<< HEAD
+ if exists(select *--productid
+            from AdventureWorks2019_1.sales.SalesOrderDetail
+            WHERE productid = 776and-- and@ProductId and 
+                  SalesOrderID =43659-- @OrdenId
+=======
