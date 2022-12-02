@@ -58,7 +58,7 @@ public class G extends javax.swing.JFrame {
 
         jLabel1.setText("CustomerID:");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel3.setText("Consulta G ");
 
         btnConsultar.setText("Consultar");
@@ -132,7 +132,7 @@ public class G extends javax.swing.JFrame {
                 .addComponent(btnCambiar)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
