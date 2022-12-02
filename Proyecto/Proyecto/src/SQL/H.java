@@ -50,7 +50,7 @@ public class H extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel1.setText("Consulta H");
 
         jLabel2.setText("Seleccionar Territorio");
