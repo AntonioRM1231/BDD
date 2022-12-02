@@ -4,6 +4,10 @@ package SQL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,12 +16,22 @@ import javax.swing.JOptionPane;
  */
 public class ProyectoPP extends javax.swing.JFrame {
 
+    Locale locale = new Locale("es","ES");
+        Date FechaHoy=new Date();
+        SimpleDateFormat formateador=new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",locale);
+        String fechaSP=formateador.format(FechaHoy);
+        DateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
+        Date fecha=new Date();
+        String horaSP=formatoHora.format(fecha);
+        
+    
     /**
      * Creates new form ProyectoPP
      */
     public ProyectoPP() {
         initComponents();
         this.setLocationRelativeTo(null);
+        fe.setText(fechaSP+" "+horaSP);
     }
 
     /**
@@ -31,7 +45,7 @@ public class ProyectoPP extends javax.swing.JFrame {
 
         btnConectar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        fe = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuA = new javax.swing.JMenu();
         irA = new javax.swing.JMenuItem();
@@ -204,29 +218,27 @@ public class ProyectoPP extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(136, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnConectar)
-                        .addGap(166, 166, 166))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(157, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addGap(166, 166, 166))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(121, 121, 121))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fe, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
+                .addGap(55, 55, 55)
                 .addComponent(btnConectar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fe, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -369,6 +381,7 @@ public class ProyectoPP extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConectar;
+    private javax.swing.JLabel fe;
     private javax.swing.JMenuItem irA;
     private javax.swing.JMenuItem irB;
     private javax.swing.JMenuItem irC;
@@ -380,7 +393,6 @@ public class ProyectoPP extends javax.swing.JFrame {
     private javax.swing.JMenuItem irI;
     private javax.swing.JMenuItem irJ;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuA;
     private javax.swing.JMenu menuB;

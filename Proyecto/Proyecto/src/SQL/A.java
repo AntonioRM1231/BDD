@@ -78,7 +78,7 @@ public class A extends javax.swing.JFrame {
 
         jLabel1.setText("Seleccionar una categoria");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel2.setText("Consulta A ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,7 +116,7 @@ public class A extends javax.swing.JFrame {
                     .addComponent(btnConsultarA)
                     .addComponent(btnHomeA)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
