@@ -114,7 +114,7 @@ public class F extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(101, 101, 101)))
                         .addComponent(btnHomeF)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

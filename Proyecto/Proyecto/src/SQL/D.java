@@ -54,7 +54,7 @@ public class D extends javax.swing.JFrame {
 
         cbxD.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
-        jLabel2.setText("Seleccionar Territorio");
+        jLabel2.setText("Seleccionar Territorio:");
 
         btnConsultaD.setText("Consultar");
         btnConsultaD.addActionListener(new java.awt.event.ActionListener() {

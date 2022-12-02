@@ -57,7 +57,7 @@ public class E extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel1.setText("Consulta E");
 
-        jLabel2.setText("Numero de la orden:");
+        jLabel2.setText("Número de la orden:");
 
         jLabel3.setText("ProductID:");
 

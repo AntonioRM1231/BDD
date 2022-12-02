@@ -53,7 +53,7 @@ public class B extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel1.setText("Consulta B");
 
-        jLabel2.setText("Seleccionar region");
+        jLabel2.setText("Seleccionar región:");
 
         cbxReg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "North America", "Europe", "Pacific" }));
 
@@ -85,10 +85,11 @@ public class B extends javax.swing.JFrame {
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(cbxReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnConsultarB)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnHomeB))

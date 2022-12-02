@@ -145,7 +145,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccionar categoria"/>
+        <Property name="text" type="java.lang.String" value="Seleccionar categor&#xed;a:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbxC">
@@ -170,7 +170,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Localidad"/>
+        <Property name="text" type="java.lang.String" value="Localidad:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnUpC">

@@ -76,7 +76,7 @@ public class C extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel1.setText("Consulta C");
 
-        jLabel2.setText("Seleccionar categoria");
+        jLabel2.setText("Seleccionar categoría:");
 
         cbxC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
 
@@ -86,7 +86,7 @@ public class C extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Localidad");
+        jLabel3.setText("Localidad:");
 
         btnUpC.setText("Modificar");
         btnUpC.addActionListener(new java.awt.event.ActionListener() {

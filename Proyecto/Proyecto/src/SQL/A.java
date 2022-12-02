@@ -76,7 +76,7 @@ public class A extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Seleccionar una categoria");
+        jLabel1.setText("Seleccionar una categoría:");
 
         jLabel2.setFont(new java.awt.Font("Bauhaus 93", 0, 18)); // NOI18N
         jLabel2.setText("Consulta A ");
@@ -92,11 +92,10 @@ public class A extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(32, 32, 32)
                                 .addComponent(btnConsultarA)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnHomeA))))

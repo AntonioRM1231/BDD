@@ -115,7 +115,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Numero de la orden:"/>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de la orden:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumOrd">
