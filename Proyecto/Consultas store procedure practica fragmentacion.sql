@@ -37,7 +37,7 @@ execute consulta_a @cat=3
 go 
 create procedure consulta_b @region nvarchar(50) as 
 begin
-	select top 1 sod.ProductID, soh.TerritoryID,sum(sod.LineTotal)as ventas 
+	select top 1 sod.ProductID, soh.TerritoryID,count(sod.ProductID)as ventas 
 	from PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
 	inner join PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	on sod.SalesOrderID=soh.SalesOrderID
@@ -346,7 +346,7 @@ execute consulta_i @fecha_1 = '01/05/2011', @fecha_2 = '31/05/2011'
 go
 create procedure consulta_j @fecha_1 datetime, @fecha_2 datetime as
 begin
-	select  top 5 sod.ProductID,sum(sod.LineTotal) ventas
+	select  top 5 sod.ProductID,count(sod.ProductID) ventas
 	from PC7.AdventureWorks2019_1.Sales.SalesOrderHeader soh
 	inner join PC7.AdventureWorks2019_1.sales.SalesOrderDetail sod
 	on soh.SalesOrderID = sod.SalesOrderID

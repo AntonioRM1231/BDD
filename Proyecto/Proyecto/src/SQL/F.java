@@ -146,10 +146,13 @@ public class F extends javax.swing.JFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
        System.out.println("fuera-try");
+       DefaultTableModel modelo = new DefaultTableModel();
         try{
-            System.out.println("try");
+            System.out.println("try del boton");
             ConsultaF cf= new ConsultaF();
-            cf.Consultar(parseInt(txtOrder.getText()));
+            System.out.println("Valor: "+parseInt(txtOrder.getText()));
+            modelo=cf.Consultar(parseInt(txtOrder.getText()));
+            tblF.setModel(modelo);
         }catch(Exception e){
             
         }
@@ -163,8 +166,8 @@ public class F extends javax.swing.JFrame {
         // TODO add your handling code here:
         int method =  parseInt(JOptionPane.showInputDialog("Ingrese el ShipMethod nuevo:"));
         try{
-            ConsultaF cf= new ConsultaF();
-            cf.Cambiar(method,parseInt(txtOrder.getText()));
+            ConsultaF cf2= new ConsultaF();
+            cf2.Cambiar(method,parseInt(txtOrder.getText()));
         }catch(Exception e){
             
         }
